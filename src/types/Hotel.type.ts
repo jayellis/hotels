@@ -1,5 +1,6 @@
-import facilities from './Facilities.type'
-import images from './Image.type'
+import Facilities from './Facilities.type'
+import Images from './Image.type'
+import Rooms from './Room.type'
 
 interface HotelData {
   id?: any | null
@@ -13,12 +14,15 @@ interface HotelData {
   countryCode: string
   starRating: string
   facilities: [ {
-    key: facilities
+    key: Facilities
   } ]
   telephone: string
   email: string
   images: [ {
-    key: images
+    key: Images
+  } ]
+  rooms: [ {
+    key: Rooms
   } ]
 }
 

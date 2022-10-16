@@ -1,5 +1,5 @@
 import React from 'react'
-import HotelsList from '../components/hotels-list.component'
+import HotelsList from '../components/Hotels-list.component'
 
 const Hotels: React.FC = () => {
   return (
