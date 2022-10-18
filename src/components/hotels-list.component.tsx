@@ -4,7 +4,7 @@ import HotelDataService from '../services/Hotels.service'
 import RoomDataService from '../services/Rooms.service'
 import HotelData from '../types/Hotel.type'
 import RoomData from '../types/Room.type'
-import RoomsComponent from '../components/Rooms.component'
+import ImageData from '../types/Image.type'
 
 type Props = {}
 type State = {
@@ -86,18 +86,19 @@ export default class HotelsList extends Component<Props, State>{
     this.filterResults( 'noStars', value )
   }
   filterResults( filterOn: string, value: number ) {
+    const noAdultsValue = filterOn === 'noAdults' ? value : this.state.noAdult 
+    const noChildrenValue = filterOn === 'noChildren' ? value : this.state.noChildren
+
     const filtered = this.state.hotels.filter( ( hotel: HotelData, index: number ) => {
       const hotelStarRating = parseInt( hotel.starRating )
       const starRating = filterOn === 'noStars' ? hotelStarRating : this.state.noStars
 
       const noChildren = hotel.rooms.map( ( room: any ) => {
-        const useValue = filterOn === 'noChildren' ? value : this.state.noChildren
-        return room.occupancy.maxChildren >= useValue
+        return room.occupancy.maxChildren >= noChildrenValue
       } ).includes(true)
 
       const noAdult = hotel.rooms.map( ( room: any ) => {
-        const useValue = filterOn === 'noAdults' ? value : this.state.noAdult
-        return room.occupancy.maxAdults >= useValue
+        return room.occupancy.maxAdults >= noAdultsValue
       } ).includes(true)
 
       if( filterOn === 'noStars' ) {
@@ -107,8 +108,8 @@ export default class HotelsList extends Component<Props, State>{
       } else if( filterOn === 'noAdults' ) {
         return ( noAdult && starRating === hotelStarRating && noChildren ) 
       }
-
     } )
+
     this.setState( {
       filtered:filtered
     } )
@@ -165,7 +166,7 @@ export default class HotelsList extends Component<Props, State>{
         <ul>
           { filtered && filtered.map( ( hotel: HotelData, index: number ) => (
             <li key={ hotel.id }>
-              { hotel && hotel.images.map( ( image: any, index: number ) => (
+              { hotel && hotel.images.map( ( image: ImageData, index: number ) => (
                 <img src={ image.url } alt={ image.alt } key={ index } />
               ) ) }
               <div>
@@ -180,7 +181,23 @@ export default class HotelsList extends Component<Props, State>{
 
               <h4> { hotel.name }</h4>
               <p>{ hotel.description }</p>
-              <RoomsComponent props={ hotel.rooms }/>
+              <ul>
+                { hotel.rooms && hotel.rooms.map( ( room: any, index: number ) => (
+                    <li key={ room.id } className={ room.occupancy.maxAdults > noAdult || room.occupancy.maxChildren > noChildren ? 'hide' : 'show' } >
+                      <aside>
+                        <h4 className='room-title'>{ room.name }</h4>
+                        <ul className='room-occupancy'>
+                          <li>Adults: { room.occupancy.maxAdults }</li>
+                          <li>Children: { room.occupancy.maxChildren }</li>
+                        </ul>
+                      </aside>
+                      <main>
+                        <p>{ room.longDescription }</p>
+                      </main>
+                    </li>
+                  ) )  
+                }
+              </ul>
             </li>
           ) ) }
         </ul>
