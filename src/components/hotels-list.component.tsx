@@ -13,13 +13,11 @@ type State = {
   noStars:number,
   filtered: Array<HotelData>
   hotels: Array<HotelData>
-  searchTerms: {}
 }
 
 export default class HotelsList extends Component<Props, State>{
   constructor( props: Props ) {
     super(props)
-    this.refreshList = this.refreshList.bind(this)
     this.retrieveHotels = this.retrieveHotels.bind(this)
     this.filterAdults = this.filterAdults.bind(this)
     this.filterChildren = this.filterChildren.bind(this)
@@ -30,13 +28,9 @@ export default class HotelsList extends Component<Props, State>{
       noStars:3,
       filtered:[],
       hotels:[],
-      searchTerms:{}
     }
   }
   componentDidMount() {
-    this.retrieveHotels()
-  }
-  refreshList() {
     this.retrieveHotels()
   }
   retrieveHotels() {
@@ -115,7 +109,7 @@ export default class HotelsList extends Component<Props, State>{
     } )
   }
   render() { 
-    const { hotels, filtered, noStars, noAdult, noChildren, searchTerms } = this.state
+    const { hotels, filtered, noStars, noAdult, noChildren } = this.state
     return (
       <>
         <div>
@@ -183,7 +177,7 @@ export default class HotelsList extends Component<Props, State>{
               <p>{ hotel.description }</p>
               <ul>
                 { hotel.rooms && hotel.rooms.map( ( room: any, index: number ) => (
-                    <li key={ room.id } className={ room.occupancy.maxAdults > noAdult || room.occupancy.maxChildren > noChildren ? 'hide' : 'show' } >
+                    <li key={ hotel.id +'-'+ room.id } className={ ( this.state.noAdult > room.occupancy.maxAdults || this.state.noChildren > room.occupancy.maxChildren ) ? 'hide room' : 'room' } >
                       <aside>
                         <h4 className='room-title'>{ room.name }</h4>
                         <ul className='room-occupancy'>
