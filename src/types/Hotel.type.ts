@@ -1,6 +1,7 @@
 import Facilities from './Facilities.type'
 import Images from './Image.type'
 import Rooms from './Room.type'
+import Occupancy from './Occupancy.type'
 
 interface HotelData {
   id?: any | null
