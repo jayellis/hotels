@@ -1,0 +1,121 @@
+square()
+  position relative
+  width 100%
+  background-repeat no-repeat
+  background-position center center
+  background-size cover
+  &::before
+    content ''
+    display block
+    padding-top 100%
+
+aspect( padding )
+  position relative
+  width 100%
+  background-repeat no-repeat
+  background-position center center
+  background-size cover
+  &::after
+    content ''
+    display block
+    padding-top padding
+
+styledScroll()
+  scrollbar-color dark*2.5 dark
+  scrollbar-track-color dark
+  scrollbar-face-color dark*2.5
+  &::-webkit-scrollbar 
+    background-color dark
+  &::-webkit-scrollbar-thumb
+    background-color dark*2
+    border-radius(micro-size)
+    border solid micro-size*0.5 dark
+    width 2px
+  &::-webkit-scrollbar-corner
+    background-color dark*1.5
+  &::-webkit-resizer
+    background-color dark*1.3
+
+rectangle()
+  position relative
+  width 100%
+  background-repeat no-repeat
+  background-position center center
+  background-size cover
+  &::before
+    content ''
+    display block
+    padding-top 50%
+
+cntrStyle()
+  position absolute
+  top 50%
+  left 50%
+  width 100%
+  -webkit-transform translate(-50%,-50%);
+  -moz-transform translate(-50%,-50%);
+  -ms-transform translate(-50%,-50%);
+  -0-transform translate(-50%,-50%);
+  transform translate(-50%,-50%);
+
+border-radius()
+  -moz-border-radius arguments
+  -webkit-border-radius arguments
+  border-radius arguments
+
+appearance()
+  -webkit-appearance arguments
+  -moz-appearance arguments
+  -o-appearance arguments
+  appearance arguments
+  
+background-linear-gradient(args...)
+  background-image -webkit-linear-gradient(arg)
+  background-image -moz-linear-gradient(arg)
+  background-image -ms-linear-gradient(arg)
+  background-image -o-linear-gradient(arg)
+  background-image linear-gradient(arg)
+
+background-radial-gradient(position, type, start, end)
+  background-image -webkit-gradient(radial, position, type, start, end)
+  background-image -webkit-radial-gradient(position, type, start, end)
+  background-image -ms-radial-gradient(position, type, start, end)
+  background-image -o-radial-gradient(position, type, start, end)
+  background-image -moz-radial-gradient(position, type, start, end)
+
+linear_gradient(origin, colors...)
+  fallback = colors[1][0]
+  colors = join(', ', colors)
+  colors = unquote(colors)
+  background-color: fallback
+  background-image: -webkit-linear-gradient(origin, colors) // Chrome, Safari
+  background-image:    -moz-linear-gradient(origin, colors) // Firefox (3.6 - 15)
+  background-image:     -ms-linear-gradient(origin, colors) // IE 10
+  background-image:      -o-linear-gradient(origin, colors) // Opera (11.1 - 12.0) 
+  background-image:         linear-gradient(origin, colors) // W3C
+
+box-shadow(args...) 
+  -moz-box-shadow arg
+  -webkit-box-shadow args
+  box-shadow args
+
+clearfix()
+  content ''
+  visibility none
+  display block
+  height 0
+  clear both
+
+rotateElm(angle)
+  -webkit-transform rotate(angle)
+  -moz-transform rotate(angle)
+  transform rotate(angle)
+
+/*common elements*/
+div, a, form, input, textarea
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+a
+  text-decoration none
+  color inherit
