@@ -1,4 +1,4 @@
-import { Component, ChangeEvent, MouseEvent } from 'react'
+import { Component, ChangeEvent, MouseEvent, UIEvent } from 'react'
 import { Slide } from 'react-slideshow-image'
 import 'react-slideshow-image/dist/styles.css'
 import StarRatings from 'react-star-ratings'
@@ -64,6 +64,7 @@ export default class HotelsList extends Component<Props, State>{
         filtered: response.data,
         hotels: response.data,
       } )
+      return response.data
     } )
     .then( () => { 
       this.filterResults( 'noStars', 0 ) 
@@ -139,7 +140,7 @@ export default class HotelsList extends Component<Props, State>{
         ) }
         <div className='header'>
         </div>
-        <div className='filter-wrapper '>
+        <div className='filter-wrapper ' >
           <button
             type='button'
             className='filter-button filter-hide material-symbols-outlined'
@@ -187,7 +188,6 @@ export default class HotelsList extends Component<Props, State>{
                 type='button'
                 className='previous'
                 disabled={ this.state.noChildren < 1 ? true : false }
-                value='-'
                 onClick={ this.filterChildren }
                 >-</button>
               <span>

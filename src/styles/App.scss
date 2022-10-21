@@ -36,8 +36,6 @@ body {
   .rooms {
     padding:$micro-size;
     background-color: #eee;
-    border: solid $micro-size black;
-    border-top: none;
     .room {
       margin-top:$micro-size;
       padding-top:$small-size;
@@ -97,7 +95,7 @@ body {
       }
       .star-ratings {
         position: absolute !important;
-        top:$small-size;
+        top:$micro-size;
         right:$small-size;
       }
       .react-slideshow-container {
@@ -134,10 +132,8 @@ body {
       align: 1px;
       height:$large-size;
       width:$large-size;
-      font-family: 'Material Symbols Outlined';
       background-color: black;
-      color:white;
-      background-image: url('../../public/search.svg');
+      background-image: url('../../public/magnifying-glass.svg');
       background-repeat:no-repeat;
       background-position:center;
       background-size:50%;
@@ -171,12 +167,15 @@ body {
         }
         button {
           position:relative;
-          border:solid white thin;
-          background-color:black;
-          color:white;
           height:$small-size;
           width:$small-size;
-          border-radius:50%;
+          background-color:transparent;
+          border:none;
+          background-image:url('../../public/circle-minus.svg');
+          color:transparent;
+        }
+        .next {
+          background-image:url('../../public/circle-plus.svg');
         }
       }
     }
@@ -208,25 +207,28 @@ body {
     border-radius:0;
     background-color:black;
     margin: auto auto;
-    padding-top:400px;
+    padding-top:$title-size*4;
     .header {
       position:fixed;
       top:0;
       left:0;
       display:block;
       width:100%;
-      height:300px;
-      background-color:red;
+      height:$title-size*3;
+      background-image:url('../../public/header.jpg');
+      background-repeat:no-repeat;
+      background-size:cover;
+      background-position:center;
       z-index:200;
     }
     .filter-wrapper {
-      top:290px;
+      top:$title-size*3;
       bottom:auto;
       left:0;
       right:0;
       width:960px;
       margin:auto auto;
-
+      z-index:200;
       .filter-button {
         display:none;
       }
@@ -266,6 +268,16 @@ body {
           .hotel-address {
             position:Absolute;
             bottom: $large-size;
+            &:before {
+              content:'';
+              position:Absolute;
+              left:-$med-size;
+              width:$small-size;
+              height:$small-size;
+              background-image:url('../../public/location-dot.svg');
+              background-repeat: no-repeat;
+              background-size:contain;
+            }
           }
           .hotel-country {
             position:Absolute;
@@ -275,8 +287,6 @@ body {
         }
       }
       .rooms {
-        border:solid black $large-size;
-        border-top:0;
         .room {
           padding:$med-size;
           aside, main {
@@ -284,7 +294,7 @@ body {
             vertical-align: top;
           }
           aside {
-            width:300px;
+            width:313px;
           }
           main {
             padding-top:$small-size*0.80;
